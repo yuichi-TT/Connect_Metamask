@@ -5,9 +5,9 @@ function PlayerManagement() {
   const [players, setPlayers] = useState([
     { id: 1, name: 'Siri', health: 80, strength: 75 },
     { id: 2, name: 'Alexa', health: 90, strength: 65 },
-    { id: 3, name: 'Sam Green', health: 70, strength: 80 },
-    { id: 4, name: 'Emma White', health: 85, strength: 70 },
-    { id: 5, name: 'Alex Brown', health: 88, strength: 72 },
+    { id: 3, name: 'Piiii', health: 70, strength: 80 },
+    { id: 4, name: 'Yuichi', health: 85, strength: 70 },
+    { id: 5, name: 'Chido', health: 88, strength: 72 },
   ]);
   
   const [showForm, setShowForm] = useState(false);
