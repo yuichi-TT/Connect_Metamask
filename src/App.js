@@ -1,34 +1,34 @@
-// src/App.js
-import React, { useState, useEffect } from 'react';
-import { useMetamask } from './hooks/useMetamask';
-import Wallet from './components/Wallet';
-import PlayerList from './components/PlayerList';
+// App.js
+import React, { useState } from 'react';
+import { ethers } from 'ethers';
+import PlayerManagement from './components/PlayerManagement';
+import './App.css'; // Thêm dòng này để import CSS
 
-const App = () => {
-    const { state: { wallet } } = useMetamask();
-    const [players, setPlayers] = useState([]);
-    
-    useEffect(() => {
-        if (wallet) {
-            // Load players from localStorage (or backend)
-            const savedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-            setPlayers(savedPlayers);
-        }
-    }, [wallet]);
+function App() {
+  const [account, setAccount] = useState(null);
 
-    const handleUpdatePlayers = (updatedPlayers) => {
-        setPlayers(updatedPlayers);
-        localStorage.setItem("players", JSON.stringify(updatedPlayers));  // Save to localStorage
-    };
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setAccount(accounts[0]);
+      } catch (error) {
+        console.error("User denied account access or error:", error);
+      }
+    } else {
+      alert("Please install MetaMask!");
+    }
+  };
 
-    return (
-        <div>
-            <h1>Player Management</h1>
-            <Wallet>
-                <PlayerList players={players} onUpdatePlayers={handleUpdatePlayers} />
-            </Wallet>
-        </div>
-    );
-};
+  return (
+    <div className="App">
+      {!account ? (
+        <button className="connect-btn" onClick={connectWallet}>Connect MetaMask</button>
+      ) : (
+        <PlayerManagement />
+      )}
+    </div>
+  );
+}
 
 export default App;
