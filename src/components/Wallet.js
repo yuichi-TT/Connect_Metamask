@@ -1,3 +1,4 @@
+// src/components/Wallet.js
 import React from "react";
 import { useMetamask } from "../hooks/useMetamask";
 import { useListen } from "../hooks/useListen";
@@ -30,7 +31,7 @@ const Wallet = ({ children }) => {
 
     return (
         <div className="wallet-container">
-            <h2>Metamask</h2>
+            <h2>MetaMask</h2>
             {wallet && balance && (
                 <div>
                     <p>Address: {wallet}</p>
